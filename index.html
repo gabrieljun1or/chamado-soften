@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link 
+        rel="shortcut icon" 
+        href="https://www.softensistemas.com.br/assets/img/favicon.ico" 
+        type="image/x-icon"
+    >
+    <title>Chamado Express</title>
+    <link 
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
+        rel="stylesheet" 
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
+        crossorigin="anonymous"
+    >
+    <link 
+        rel="stylesheet" 
+        type="text/css" 
+        href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    >
+    <link 
+        rel="stylesheet" 
+        href="./css/styles.css"
+    >
+  </head>
+  <body>
+    <header class='topo'>
+        <h5>Monta Chamados</h5>
+      </header>
+    <form id="form-validate" action="POST" name="formChamado">
+        <div class="columns">
+            <div class="column-01">
+                <div class="box-body mt-3">
+                    <div class="box-form mb-3">
+                        <button 
+                            type="button" 
+                            class="btn btn-primary" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#infoModal"
+                        >
+                            <img 
+                                src="./images/icons/infoIcon.svg" 
+                                width="15" 
+                                height="15"
+                            />
+                                &nbsp;Informações
+                        </button>
+                    </div>
+                    <div 
+                        class="mb-3 box-form" 
+                        style="display: flex; flex-direction: row;"
+                    >
+                        <div style="flex-direction: column;">
+                            <label class="form-label">
+                                Tipo do chamado:
+                            </label>
+                            <div style="display: flex; flex-direction: row;">
+                                <div class="form-check">
+                                    <input 
+                                        class="form-check-input" 
+                                        type="radio" 
+                                        name="radioTipo"
+                                        value="Problema"
+                                    >
+                                    <label class="form-check-label" for="problema">
+                                        Problema
+                                    </label>
+                                </div>
+                                <div class="form-check mx-3">
+                                    <input 
+                                        class="form-check-input" 
+                                        type="radio" 
+                                        name="radioTipo" 
+                                        value="Dúvida"
+                                    >
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        Dúvida
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3 box-form" style="display: flex; justify-content: end;">
+                            <div style="width: 20rem;">
+                                <label 
+                                    class="form-label" 
+                                    for="numeroDoc"
+                                >
+                                    Número(s) do(s) documento(s) com Erro:
+                                </label>
+                                <input id="input-number" name="numero" type="text" class="input-number form form-control input-validate">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3 box-form">
+                        <div>
+                            <label 
+                                class="form-label"
+                                for="mensagemErro"    
+                            >
+                                Mensagem de Erro:
+                            </label>
+                            <input 
+                                id="input-message" 
+                                name="mensagem" 
+                                type="text" 
+                                class="input-message form form-control input-validate"
+                            >
+                        </div>
+                    </div>
+                    <div class="mb-3 box-form">
+                        <div>
+                            <label 
+                                class="form-label" 
+                                for="causaProblema"
+                            >
+                                Causa do Problema:
+                            </label>
+                            <input 
+                                id="input-problem" 
+                                name="problema" 
+                                type="text" 
+                                class="input-problem form form-control input-validate"
+                            >
+                        </div>
+                    </div>
+                    <div class="mb-3 box-form">
+                        <div>
+                            <label 
+                                class="form-label" 
+                                for="solucao"
+                            >
+                                Solução Proposta/Realizada:
+                            </label>
+                            <textarea 
+                                id="input-solution" 
+                                name="solucao" 
+                                class="input-solution form-control input-validate"
+                                rows="5"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="column-02">
+                <div class="box-body mt-3">
+                    <div class="mb-3 box-form">
+                        <div>
+                            <label 
+                                class="form-label" 
+                                for="feedback"
+                            >
+                                Feedback do Cliente:
+                            </label>
+                            <input 
+                                id="input-feedback" 
+                                name="feedback" 
+                                type="text" 
+                                class="input-feedback form form-control input-validate"
+                            >
+                        </div>
+                    </div>
+                    <div class="mb-3 box-form">
+                        <label class="form-label" for="humor">
+                            Humor do Cliente:
+                        </label>
+                        <select class="form-select" id="humor">
+                            <option selected value="0">Selecione...</option>
+                            <option value="1">Ruim</option>
+                            <option value="2">Regular</option>
+                            <option value="3">Bom</option>
+                        </select>
+                    </div>
+                    <div class="mb-3 box-form">
+                        <label 
+                            class="form-label" 
+                            for="upsell"
+                        >
+                            Oportunidade de Upsell:
+                        </label>
+                        <div style="display: flex; flex-direction: row ;">
+                            <div class="form-check">
+                                <input 
+                                    class="form-check-input" 
+                                    type="radio" 
+                                    name="radioUpsell"
+                                    value="Sim"
+                                >
+                                <label class="form-check-label" for="simUpsell">
+                                    Sim
+                                </label>
+                            </div>
+                            <div class="form-check mx-3">
+                                <input    
+                                    class="form-check-input" 
+                                    type="radio" 
+                                    name="radioUpsell"
+                                    value="Não"
+                                >
+                                <label class="form-check-label" for="naoUpsell">
+                                    Não
+                                </label>
+                            </div>
+                        </div>
+                        <div id="areaUpsell" class="mb-3 box-form mt-2">
+                            <div>
+                                <label 
+                                    class="form-label" 
+                                    for="upsellCliente"
+                                >
+                                    Descreva a situação do Upsell:
+                                </label>
+                                <textarea 
+                                    id="clienteUpsell" 
+                                    class="form-control"
+                                    rows="3"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3 box-form">
+                        <label 
+                            class="form-label" 
+                            for="upsell"
+                        >
+                            Prints de erros ou mensagens relevantes?
+                        </label>
+                        <div style="display: flex; flex-direction: row ;">
+                            <div class="form-check">
+                                <input 
+                                    class="form-check-input" 
+                                    type="radio" 
+                                    name="radioAnexo"
+                                    value="Sim"
+                                >
+                                <label class="form-check-label" for="simUpsell">
+                                    Sim
+                                </label>
+                            </div>
+                            <div class="form-check mx-3">
+                                <input    
+                                    class="form-check-input" 
+                                    type="radio" 
+                                    name="radioAnexo"
+                                    value="Não"
+                                >
+                                <label class="form-check-label" for="naoUpsell">
+                                    Não
+                                </label>
+                            </div>
+                            <div class="mb-3 box-form" style="display:flex; justify-content: end; margin-top: -25px;">
+                                <button 
+                                    id="copiar" 
+                                    type="submit" 
+                                    class="btn btn-lg btn-success"
+                                >
+                                    <img 
+                                        src="./images/icons/copyIcon.svg" 
+                                        width="15" 
+                                        height="15"
+                                    />
+                                        &nbsp;Copiar Textos
+                                    </button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="modal fade" id="infoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5">Informações</h1>
+                </div>
+                <div class="modal-body">
+                    <strong>Números dos documentos: </strong>Quando houver mais de um documento a ser referenciado
+                    no chamado, destacar todos eles no campo "Número(s) do(s) documento(s) com erro". Ao preencher a 
+                    solução do problema, destacá-los de acordo com o número do documento.
+                    <br /><br />
+
+                    <strong>Solução Proposta/Realizada: </strong> A solução deve conter detalhadamente toda a resolução,
+                    tendo mais de um documento ou não, para que quando ser necessário buscar as Informações dos atendimentos
+                    prestados, o técnico já identificar se é uma recorrência ou um novo problema.
+                    <br /><br />
+                    
+                    <strong>Feedback do Cliente: </strong> Neste campo, destacar o retorno do cliente dada a resolução
+                    do problema/dúvida apresentado por ele, sendo de interpretação do técnico.
+                    <br /><br />
+
+                    <strong>Descrição de Upsell: </strong> Mesmo que não haja uma situação típica de venda dentro do chamado,
+                    detalhar o motivo de não ter tido a oportunidade para tal.
+                    <br /><br />
+                </div>
+                <div class="modal-footer">
+                    <button 
+                        type="button" 
+                        class="btn btn-primary" 
+                        data-bs-dismiss="modal">
+                        <img 
+                            src="./images/icons/closeIcon.svg" 
+                            width="15" 
+                            height="15"
+                        />
+                        &nbsp;Fechar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer" style="justify-content: center; align-items: center;">
+        <div style="margin-top: 10px;">
+            <p>Soften Sistemas LTDA - ver. 1.0.1</p>
+        </div>    
+    </div>
+    <script 
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
+        crossorigin="anonymous"
+    ></script>
+    <script 
+        src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" 
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" 
+        crossorigin="anonymous"
+    ></script>
+    <script 
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" 
+        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" 
+        crossorigin="anonymous"
+    ></script>
+    <script 
+        type="text/javascript" 
+        src="https://cdn.jsdelivr.net/npm/toastify-js"
+    ></script>
+    <script 
+    type="module" 
+    src="./js/toasts.js"
+    ></script>
+    <script type="module" src="./js/main.js"></script>
+  </body>
+</html>
